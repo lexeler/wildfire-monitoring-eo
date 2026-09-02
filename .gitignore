@@ -1,0 +1,26 @@
+# Python / окружения / кэши
+__pycache__/
+*.pyc
+.venv/
+**/.venv/
+.pytest_cache/
+.ipynb_checkpoints/
+*.egg-info/
+
+# Локальные данные и промежуточные результаты обучения — ТОЛЬКО в корне
+# репозитория. Шаблоны с ведущим «/» не затрагивают service/data/ (каталог
+# сервиса обязан лежать в репозитории, см. service/README.md).
+/data/
+/runs/
+/out/
+/weights_new/
+*.log
+
+# Промежуточные версии сабмита; в репозитории остаётся только финальный файл
+submissions/*.csv
+!submissions/submission.csv
+
+# ОС / IDE
+.DS_Store
+.idea/
+.vscode/
