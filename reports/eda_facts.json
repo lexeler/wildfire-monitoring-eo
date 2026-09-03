@@ -1,0 +1,1949 @@
+{
+ "af": {
+  "n_chips": {
+   "value": 420,
+   "desc": "Число чипов AF (VIIRS 375 м, 256x256) в train"
+  },
+  "mask_values": {
+   "value": [
+    0,
+    1
+   ],
+   "desc": "Значения в масках AF"
+  },
+  "n_pixels": {
+   "value": 27525120,
+   "desc": "Всего пикселей во всех чипах AF"
+  },
+  "n_valid_pixels": {
+   "value": 25239188,
+   "desc": "Валидных пикселей (I4, I5 конечны, valid=1)"
+  },
+  "n_fire_px": {
+   "value": 9725,
+   "desc": "Пикселей природного пожара (класс 1)"
+  },
+  "fire_share_pct": {
+   "value": 0.0353314,
+   "desc": "Доля пикселей пожара среди всех пикселей, %"
+  },
+  "fire_share_valid_pct": {
+   "value": 0.0385314,
+   "desc": "Доля пикселей пожара среди валидных, %"
+  },
+  "imbalance_bg_per_fire": {
+   "value": 2829.35,
+   "desc": "Фоновых пикселей на один пиксель пожара"
+  },
+  "fire_px_invalid": {
+   "value": 0,
+   "desc": "Пикселей пожара с NaN в I4/I5"
+  },
+  "n_pos_chips": {
+   "value": 296,
+   "desc": "Чипов с хотя бы одним пикселем пожара"
+  },
+  "n_neg_chips": {
+   "value": 124,
+   "desc": "Чипов без пожара"
+  },
+  "fire_px_per_pos_chip": {
+   "value": {
+    "mean": 32.8547,
+    "p10": 4.0,
+    "p25": 8.0,
+    "median": 21.0,
+    "p75": 43.25,
+    "p90": 80.5,
+    "max": 243
+   },
+   "desc": "Пикселей пожара на позитивный чип"
+  },
+  "top10pct_chips_fire_share_pct": {
+   "value": 43.2288,
+   "desc": "Доля всех пикселей пожара в 10% самых «горящих» чипов, %"
+  },
+  "meta_n_fire_px_max_abs_diff": {
+   "value": 0.0,
+   "desc": "Макс. расхождение meta.n_fire_px и подсчёта по маске"
+  },
+  "night_fire_share_pct": {
+   "value": 12.2468,
+   "desc": "Доля пикселей пожара ночью (SZA > 85°), %"
+  },
+  "n_night_chips": {
+   "value": 127,
+   "desc": "Ночных чипов (медиана SZA > 85°)"
+  },
+  "n_day_chips": {
+   "value": 293,
+   "desc": "Дневных чипов"
+  },
+  "night_chip_pos_share_pct": {
+   "value": 70.0787,
+   "desc": "Доля ночных чипов с пожаром, %"
+  },
+  "day_chip_pos_share_pct": {
+   "value": 70.6485,
+   "desc": "Доля дневных чипов с пожаром, %"
+  },
+  "by_satellite": {
+   "value": {
+    "NOAA20": {
+     "chips": 123,
+     "fire_px": 3540,
+     "pos_chips": 90
+    },
+    "NOAA21": {
+     "chips": 17,
+     "fire_px": 365,
+     "pos_chips": 9
+    },
+    "SNPP": {
+     "chips": 280,
+     "fire_px": 5820,
+     "pos_chips": 197
+    }
+   },
+   "desc": "Чипы и пиксели пожара по спутникам"
+  },
+  "fire_thresholds": {
+   "value": {
+    "day": {
+     "n": 8534,
+     "I4_min": 319.249,
+     "I4_p1": 326.981,
+     "I4_p5": 329.62,
+     "I4_median": 340.314,
+     "dT_min": -15.2207,
+     "dT_p1": 25.2539,
+     "dT_p5": 27.5779,
+     "dT_median": 38.9937,
+     "pass_fixed_pct": 99.2969
+    },
+    "night": {
+     "n": 1191,
+     "I4_min": 295.04,
+     "I4_p1": 295.386,
+     "I4_p5": 296.441,
+     "I4_median": 311.196,
+     "dT_min": 10.0351,
+     "dT_p1": 10.4218,
+     "dT_p5": 11.6845,
+     "dT_median": 28.07,
+     "pass_fixed_pct": 100.0
+    }
+   },
+   "desc": "Статистика I4 и dT=I4-I5 пикселей пожара (день/ночь) и доля, проходящая пороги VNP14IMG"
+  },
+  "vnp14img_thresholds": {
+   "value": {
+    "day": [
+     325.0,
+     25.0
+    ],
+    "night": [
+     295.0,
+     10.0
+    ],
+    "night_sza": 85.0
+   },
+   "desc": "Фиксированные пороги VNP14IMG: день I4>325 K и dT>25 K; ночь I4>295 K и dT>10 K"
+  },
+  "fixed_rule_all": {
+   "value": {
+    "tp": 9665,
+    "fp": 2313,
+    "fn": 60,
+    "precision": 0.806896,
+    "recall": 0.99383,
+    "f1": 0.89066
+   },
+   "desc": "Только фиксированные пороги VNP14IMG как классификатор (микро по пикселям)"
+  },
+  "fixed_rule_day": {
+   "value": {
+    "tp": 8474,
+    "fp": 1730,
+    "fn": 60,
+    "precision": 0.830459,
+    "recall": 0.992969,
+    "f1": 0.904472
+   },
+   "desc": "То же, только дневные пиксели"
+  },
+  "fixed_rule_night": {
+   "value": {
+    "tp": 1191,
+    "fp": 583,
+    "fn": 0,
+    "precision": 0.671364,
+    "recall": 1.0,
+    "f1": 0.803373
+   },
+   "desc": "То же, только ночные пиксели"
+  },
+  "background_pass_fixed": {
+   "value": 2313,
+   "desc": "Фоновых пикселей, проходящих фиксированные пороги (ложные срабатывания)"
+  },
+  "fire_local_max_share_pct": {
+   "value": 52.5861,
+   "desc": "Доля пикселей пожара, являющихся локальным максимумом I4 в окне 3x3, %"
+  },
+  "clusters": {
+   "value": {
+    "n": 3287,
+    "median_size": 2.0,
+    "mean_size": 2.95862,
+    "max_size": 123,
+    "single_px_cluster_share_pct": 40.6754,
+    "fire_px_in_clusters_ge2_pct": 86.2519
+   },
+   "desc": "Связные (8-соседство) кластеры пикселей пожара"
+  },
+  "landcover": {
+   "value": {
+    "10": {
+     "name": "деревья",
+     "fire_px": 1332,
+     "fire_share_pct": 13.6967,
+     "territory_share_pct": 15.3093,
+     "enrichment": 0.894662,
+     "rule_fp_share_pct": 13.0999
+    },
+    "20": {
+     "name": "кустарник",
+     "fire_px": 0,
+     "fire_share_pct": 0.0,
+     "territory_share_pct": 0.000328854,
+     "enrichment": 0.0,
+     "rule_fp_share_pct": 0.0
+    },
+    "30": {
+     "name": "травы",
+     "fire_px": 3622,
+     "fire_share_pct": 37.2442,
+     "territory_share_pct": 20.2991,
+     "enrichment": 1.83477,
+     "rule_fp_share_pct": 26.3727
+    },
+    "40": {
+     "name": "пашня",
+     "fire_px": 4099,
+     "fire_share_pct": 42.1491,
+     "territory_share_pct": 52.6929,
+     "enrichment": 0.7999,
+     "rule_fp_share_pct": 39.6455
+    },
+    "50": {
+     "name": "застройка",
+     "fire_px": 357,
+     "fire_share_pct": 3.67095,
+     "territory_share_pct": 1.28,
+     "enrichment": 2.86793,
+     "rule_fp_share_pct": 15.8668
+    },
+    "60": {
+     "name": "голый грунт",
+     "fire_px": 21,
+     "fire_share_pct": 0.215938,
+     "territory_share_pct": 0.110657,
+     "enrichment": 1.95142,
+     "rule_fp_share_pct": 0.0864678
+    },
+    "80": {
+     "name": "вода",
+     "fire_px": 34,
+     "fire_share_pct": 0.349614,
+     "territory_share_pct": 7.84934,
+     "enrichment": 0.0445406,
+     "rule_fp_share_pct": 1.51319
+    },
+    "90": {
+     "name": "болота",
+     "fire_px": 260,
+     "fire_share_pct": 2.67352,
+     "territory_share_pct": 1.99592,
+     "enrichment": 1.33949,
+     "rule_fp_share_pct": 3.41548
+    }
+   },
+   "desc": "Покров (ESA WorldCover) пикселей пожара vs доля территории и ложных срабатываний порогов"
+  },
+  "corrupted_chips": {
+   "value": {
+    "ids": [
+     "AF_tr_000409",
+     "AF_tr_000410",
+     "AF_tr_000411",
+     "AF_tr_000412",
+     "AF_tr_000413",
+     "AF_tr_000414",
+     "AF_tr_000415",
+     "AF_tr_000416",
+     "AF_tr_000417",
+     "AF_tr_000418",
+     "AF_tr_000419",
+     "AF_tr_000420"
+    ],
+    "satellite": [
+     "NOAA20",
+     "NOAA20",
+     "NOAA20",
+     "NOAA20",
+     "NOAA20",
+     "NOAA21",
+     "NOAA21",
+     "NOAA21",
+     "NOAA21",
+     "NOAA21",
+     "NOAA21",
+     "NOAA21"
+    ],
+    "date": [
+     "2024-09-30",
+     "2024-09-30",
+     "2024-09-30",
+     "2024-09-30",
+     "2024-09-30",
+     "2024-10-01",
+     "2024-10-01",
+     "2024-10-01",
+     "2024-10-01",
+     "2024-10-01",
+     "2024-10-01",
+     "2024-10-01"
+    ],
+    "I4_nan_frac": [
+     0.0,
+     0.0,
+     0.0,
+     0.0666199,
+     0.0804443,
+     0.534912,
+     0.221069,
+     0.245529,
+     0.246796,
+     0.228943,
+     0.239044,
+     0.458984
+    ],
+    "stripe_nan_frac": [
+     0.0,
+     0.0,
+     0.0,
+     0.0666199,
+     0.0804443,
+     0.134512,
+     0.221069,
+     0.245529,
+     0.246796,
+     0.228943,
+     0.239044,
+     0.139284
+    ],
+    "meta_valid_frac": [
+     1.0,
+     1.0,
+     1.0,
+     1.0,
+     1.0,
+     0.5996,
+     1.0,
+     1.0,
+     1.0,
+     1.0,
+     1.0,
+     0.6803
+    ],
+    "median_vza": [
+     29.66,
+     30.75,
+     32.85,
+     38.11,
+     40.7,
+     58.66,
+     58.84,
+     64.06,
+     64.51,
+     66.34,
+     65.09,
+     68.93
+    ],
+    "fire_px": [
+     164,
+     0,
+     29,
+     95,
+     38,
+     38,
+     135,
+     0,
+     42,
+     0,
+     42,
+     24
+    ]
+   },
+   "desc": "Чипы 000409-000420 (организаторы подтвердили пропуски строк): доля NaN в I4, NaN внутри полосы обзора, meta.valid_frac, VZA"
+  },
+  "nan_frac_corrupted_max_pct": {
+   "value": 53.4912,
+   "desc": "Макс. доля NaN в I4 среди чипов 409-420, %"
+  },
+  "nan_frac_all": {
+   "value": {
+    "median_pct": 4.65927,
+    "p95_pct": 24.2634,
+    "max_pct": 54.0344,
+    "chips_with_any_nan": 227,
+    "chips_nan_gt10pct": 119,
+    "valid_px_share_pct": 91.6951
+   },
+   "desc": "Доля NaN в I4 по всем чипам train"
+  },
+  "meta_valid_frac": {
+   "value": {
+    "chips_lt1": 14,
+    "min": 0.4597,
+    "corr_with_1_minus_nan": 0.475688
+   },
+   "desc": "meta.valid_frac описывает только долю чипа внутри полосы обзора (не учитывает полосы NaN)"
+  },
+  "stripe_nan": {
+   "value": {
+    "chips_gt1pct": 219,
+    "chips_gt1pct_share_pct": 52.1429,
+    "median_pct_among_affected": 13.3133,
+    "max_pct": 25.264,
+    "vza_min_affected": 34.74,
+    "vza_max_unaffected": 33.83,
+    "affected_share_vza_gt_threshold_pct": 100.0,
+    "spearman_vza": 0.93642
+   },
+   "desc": "Полосы NaN внутри полосы обзора (удаление «bow-tie» на краях скана VIIRS): число чипов, связь с зенитным углом сенсора"
+  },
+  "fire_px_next_to_nan_pct": {
+   "value": 11.0746,
+   "desc": "Доля пикселей пожара, соседствующих (3x3) с NaN, %"
+  },
+  "fixed_rule_missed_day": {
+   "value": {
+    "n": 60,
+    "dT_lt0": 15,
+    "I4_median": 338.719,
+    "I5_median": 330.014,
+    "I4_lt325": 8,
+    "dT_le25": 60
+   },
+   "desc": "Дневные пиксели пожара, не проходящие фиксированные пороги (контекстные тесты VNP14IMG)"
+  },
+  "rule_hot_recurrence": {
+   "value": [
+    {
+     "n_dates": "1",
+     "rule_px": 11157,
+     "fire_share_pct": 82.1726,
+     "built_up_share_pct": 1.34445
+    },
+    {
+     "n_dates": "2",
+     "rule_px": 268,
+     "fire_share_pct": 69.0299,
+     "built_up_share_pct": 25.3731
+    },
+    {
+     "n_dates": "3-4",
+     "rule_px": 148,
+     "fire_share_pct": 52.7027,
+     "built_up_share_pct": 91.2162
+    },
+    {
+     "n_dates": "5-9",
+     "rule_px": 252,
+     "fire_share_pct": 50.0,
+     "built_up_share_pct": 90.873
+    },
+    {
+     "n_dates": ">=10",
+     "rule_px": 153,
+     "fire_share_pct": 70.5882,
+     "built_up_share_pct": 92.8105
+    }
+   ],
+   "desc": "Пиксели, проходящие пороги, по числу разных дат, когда та же точка (сетка 375 м) была «горячей»: доля эталонного пожара"
+  },
+  "recurrent_locations": {
+   "value": {
+    "n_locations_ge3": 97,
+    "n_locations_ge10": 12,
+    "ge3_built_up_share_pct": 90.7216,
+    "ge3_mean_fire_label_share_pct": 53.4064,
+    "top_location_lonlat": [
+     39.6149,
+     52.5572
+    ],
+    "top_location_n_dates": 17,
+    "rule_hot_built_up_fire_share_pct": 49.3094,
+    "rule_hot_other_fire_share_pct": 82.7084
+   },
+   "desc": "Точки (сетка 375 м), «горячие» по порогам в >=3 разные даты: почти все — застройка (промышленные объекты), но эталон помечает их пожаром в ~половине случаев => статической маски техногенных источников в эталоне нет"
+  },
+  "fp_recurrent_ge3_pct": {
+   "value": 10.4194,
+   "desc": "Доля ложных срабатываний порогов в точках, горячих в >=3 разные даты, %"
+  },
+  "tp_recurrent_ge3_pct": {
+   "value": 3.22814,
+   "desc": "То же для истинных пикселей пожара, %"
+  },
+  "fp_built_up_share_pct": {
+   "value": 15.8668,
+   "desc": "Доля ложных срабатываний порогов на застройке (50), %"
+  },
+  "tp_built_up_share_pct": {
+   "value": 3.69374,
+   "desc": "Доля пикселей пожара на застройке (50), %"
+  }
+ },
+ "bs": {
+  "n_chips": {
+   "value": 224,
+   "desc": "Число чипов BS (Sentinel-2/1, 20 м, 512x512) в train; один чип = один пожар"
+  },
+  "mask_nodata_px": {
+   "value": 0,
+   "desc": "Пикселей со значением 255 (nodata) в масках"
+  },
+  "burned_share_pct": {
+   "value": 10.063,
+   "desc": "Доля пикселей гари (класс >= 1) среди всех пикселей, %"
+  },
+  "severity_px": {
+   "value": [
+    52811255,
+    2362871,
+    2192271,
+    1353859
+   ],
+   "desc": "Пикселей по классам эталона 0/1/2/3"
+  },
+  "severity_share_of_burned_pct": {
+   "value": [
+    39.9877,
+    37.1005,
+    22.9118
+   ],
+   "desc": "Доли степеней 1/2/3 среди гари, % (постановка: 40,0/37,1/22,9)"
+  },
+  "burned_share_per_chip": {
+   "value": {
+    "median_pct": 7.51858,
+    "p10_pct": 2.21176,
+    "p90_pct": 22.8164,
+    "min_pct": 0.0102997,
+    "max_pct": 56.0558,
+    "chips_without_burn": 0
+   },
+   "desc": "Доля гари в чипе"
+  },
+  "burned_area_ha_per_chip": {
+   "value": {
+    "median": 788.38,
+    "p10": 231.92,
+    "p90": 2392.47,
+    "max": 5877.88
+   },
+   "desc": "Площадь гари на чип, га"
+  },
+  "meta_burn_area_max_abs_diff_ha": {
+   "value": 4.54747e-13,
+   "desc": "Расхождение meta.burn_area_ha и маски, га"
+  },
+  "date_gap_days": {
+   "value": {
+    "min": 10,
+    "median": 15.0,
+    "max": 50
+   },
+   "desc": "Интервал между снимками до/после, дней"
+  },
+  "rule_agreement_exact": {
+   "value": {
+    "raw": 0.924462,
+    "mean3": 0.936463,
+    "gauss1": 0.933639,
+    "mode3": 0.958689,
+    "median3": 0.970588
+   },
+   "desc": "Совпадение класса правила порогов с эталоном внутри гари (0 правила = ошибка)"
+  },
+  "rule_agreement_clip": {
+   "value": {
+    "raw": 0.937804,
+    "mean3": 0.953854,
+    "gauss1": 0.949887,
+    "mode3": 0.979324,
+    "median3": 0.985157
+   },
+   "desc": "То же, класс правила обрезан до [1,3] (так собирается итоговая маска)"
+  },
+  "rule_error_edge_vs_interior": {
+   "value": {
+    "edge_raw": 0.125769,
+    "interior_raw": 0.0243025,
+    "edge_median3": 0.0341755,
+    "interior_median3": 0.00331988,
+    "edge_px_share": 0.373456
+   },
+   "desc": "Доля ошибок класса правила (обрезан до 1..3) на границах классов эталона vs внутри (raw и медиана 3x3)"
+  },
+  "landcover_variant_agreement": {
+   "value": {
+    "pixel": {
+     "all": 0.985157,
+     "forest": 0.907261,
+     "grass": 0.988917,
+     "crop": 0.990416,
+     "wetland": 0.928061
+    },
+    "mode3": {
+     "all": 0.985666,
+     "forest": 0.911353,
+     "grass": 0.989226,
+     "crop": 0.990671,
+     "wetland": 0.931694
+    },
+    "mode5": {
+     "all": 0.983936,
+     "forest": 0.879155,
+     "grass": 0.988205,
+     "crop": 0.990437,
+     "wetland": 0.925086
+    },
+    "mode9": {
+     "all": 0.981231,
+     "forest": 0.834307,
+     "grass": 0.986294,
+     "crop": 0.989907,
+     "wetland": 0.916203
+    },
+    "forest_wetland_as_grass": {
+     "all": 0.968278,
+     "forest": 0.665293,
+     "grass": 0.988917,
+     "crop": 0.990416,
+     "wetland": 0.650265
+    },
+    "chip_dominant": {
+     "all": 0.959443,
+     "forest": 0.633963,
+     "grass": 0.964677,
+     "crop": 0.982858,
+     "wetland": 0.821546
+    }
+   },
+   "desc": "Совпадение класса правила (медиана 3x3, обрезан до 1..3) внутри гари при разных картах покрова для выбора порогов: попиксельная, мажоритарная 3/5/9, лес и болота с порогами трав, доминирующая группа чипа"
+  },
+  "rule_confusion": {
+   "value": {
+    "r1_b": 5822914,
+    "r1_nb": 10249797,
+    "r0_b": 86087,
+    "cand_b": 5818187,
+    "cand_nb": 7722971,
+    "ex_b": 4782,
+    "ex_px": 5644445
+   },
+   "desc": "r1: dNBR выше порога «не горело» своей группы; cand = r1 и SCL не исключён; _b/_nb: эталон гарь/не гарь"
+  },
+  "burned_satisfy_rule_pct": {
+   "value": 98.5431,
+   "desc": "Доля пикселей гари, где правило даёт класс >= 1, %"
+  },
+  "rule1_labeled_burned_pct": {
+   "value": 36.2286,
+   "desc": "Доля размеченных гарью среди всех r1-пикселей, %"
+  },
+  "cand_labeled_burned_pct": {
+   "value": 42.9667,
+   "desc": "То же после исключения SCL, %"
+  },
+  "burned_in_excluded_scl_px": {
+   "value": 4782,
+   "desc": "Пикселей гари в исключаемых SCL (0,3,6,9,11 на любой дате)"
+  },
+  "rule_only_scores": {
+   "value": {
+    "iou_burn": 0.426805,
+    "miou_sev": 0.514272,
+    "iou_sev1": 0.288856,
+    "iou_sev2": 0.518697,
+    "iou_sev3": 0.735264
+   },
+   "desc": "Правило без ограничения области (r1 и не исключено, класс = правило): IoU гари и mIoU степеней"
+  },
+  "scl_burned_share_among_r1": {
+   "value": {
+    "pre": {
+     "0": {
+      "name": "нет данных",
+      "r1_px": 156926,
+      "burned_share": 0.0,
+      "all_px_share_pct": 0.535887
+     },
+     "1": {
+      "name": "дефект",
+      "r1_px": 0,
+      "burned_share": null,
+      "all_px_share_pct": 0.0
+     },
+     "2": {
+      "name": "тёмные обл.",
+      "r1_px": 209676,
+      "burned_share": 0.184084,
+      "all_px_share_pct": 0.635002
+     },
+     "3": {
+      "name": "тень облака",
+      "r1_px": 627803,
+      "burned_share": 0.0,
+      "all_px_share_pct": 1.52911
+     },
+     "4": {
+      "name": "растительность",
+      "r1_px": 3319738,
+      "burned_share": 0.185826,
+      "all_px_share_pct": 15.0565
+     },
+     "5": {
+      "name": "грунт",
+      "r1_px": 8332558,
+      "burned_share": 0.532722,
+      "all_px_share_pct": 67.7239
+     },
+     "6": {
+      "name": "вода",
+      "r1_px": 716233,
+      "burned_share": 7.9583e-05,
+      "all_px_share_pct": 2.64521
+     },
+     "7": {
+      "name": "неклассиф.",
+      "r1_px": 308312,
+      "burned_share": 0.272,
+      "all_px_share_pct": 0.904695
+     },
+     "8": {
+      "name": "облако (ср.)",
+      "r1_px": 631711,
+      "burned_share": 0.272115,
+      "all_px_share_pct": 2.20425
+     },
+     "9": {
+      "name": "облако (выс.)",
+      "r1_px": 538680,
+      "burned_share": 0.00276416,
+      "all_px_share_pct": 1.39772
+     },
+     "10": {
+      "name": "перистые",
+      "r1_px": 1185658,
+      "burned_share": 0.397402,
+      "all_px_share_pct": 7.26416
+     },
+     "11": {
+      "name": "снег",
+      "r1_px": 45416,
+      "burned_share": 0.0,
+      "all_px_share_pct": 0.103559
+     }
+    },
+    "post": {
+     "0": {
+      "name": "нет данных",
+      "r1_px": 73052,
+      "burned_share": 0.0,
+      "all_px_share_pct": 0.379317
+     },
+     "1": {
+      "name": "дефект",
+      "r1_px": 0,
+      "burned_share": null,
+      "all_px_share_pct": 0.0
+     },
+     "2": {
+      "name": "тёмные обл.",
+      "r1_px": 237486,
+      "burned_share": 0.762984,
+      "all_px_share_pct": 1.03629
+     },
+     "3": {
+      "name": "тень облака",
+      "r1_px": 163217,
+      "burned_share": 0.0,
+      "all_px_share_pct": 1.53479
+     },
+     "4": {
+      "name": "растительность",
+      "r1_px": 1286203,
+      "burned_share": 0.0672958,
+      "all_px_share_pct": 12.1155
+     },
+     "5": {
+      "name": "грунт",
+      "r1_px": 11240769,
+      "burned_share": 0.431554,
+      "all_px_share_pct": 67.2095
+     },
+     "6": {
+      "name": "вода",
+      "r1_px": 691503,
+      "burned_share": 0.00456686,
+      "all_px_share_pct": 2.68373
+     },
+     "7": {
+      "name": "неклассиф.",
+      "r1_px": 401296,
+      "burned_share": 0.66191,
+      "all_px_share_pct": 1.41894
+     },
+     "8": {
+      "name": "облако (ср.)",
+      "r1_px": 472122,
+      "burned_share": 0.0618908,
+      "all_px_share_pct": 2.90474
+     },
+     "9": {
+      "name": "облако (выс.)",
+      "r1_px": 158282,
+      "burned_share": 0.000164264,
+      "all_px_share_pct": 1.289
+     },
+     "10": {
+      "name": "перистые",
+      "r1_px": 1345279,
+      "burned_share": 0.301895,
+      "all_px_share_pct": 9.41399
+     },
+     "11": {
+      "name": "снег",
+      "r1_px": 3502,
+      "burned_share": 0.0,
+      "all_px_share_pct": 0.0142932
+     }
+    }
+   },
+   "desc": "Доля размеченных гарью среди r1-пикселей по классу SCL (до/после)"
+  },
+  "excluded_scl_share": {
+   "value": {
+    "mean_pct": 9.61243,
+    "median_pct": 2.82555,
+    "max_pct": 73.2594
+   },
+   "desc": "Доля пикселей чипа с исключаемым SCL (0,3,6,9,11 до или после), %"
+  },
+  "cloud_frac_definition_mae": {
+   "value": {
+    "post_8_9_10": 0.147641,
+    "prepost_8_9_10": 0.185689,
+    "post_3_8_9_10": 0.144142,
+    "prepost_3_8_9_10": 0.184091,
+    "prepost_0_3_8_9_10": 0.177987,
+    "pre_8_9_10": 0.116058,
+    "pre_3_8_9_10": 0.11065,
+    "post_8_9": 0.0737705,
+    "prepost_8_9": 0.0604701,
+    "post_3_8_9": 0.0642334,
+    "prepost_3_8_9": 0.0445932,
+    "post_0_1_3_8_9_10_11": 0.142468,
+    "excluded": 0.0375206
+   },
+   "desc": "MAE между meta.cloud_frac и долями SCL при разных определениях облачности (коды SCL; pre/post/prepost = «до»/«после»/любая)"
+  },
+  "cloud_frac_best_definition": {
+   "value": {
+    "name": "excluded",
+    "mae": 0.0375206,
+    "corr": 0.705441
+   },
+   "desc": "Ближайшее к meta.cloud_frac определение облачности по SCL"
+  },
+  "valid_plus_cloud": {
+   "value": {
+    "min": 1.0,
+    "max": 1.0
+   },
+   "desc": "valid_frac + cloud_frac (ровно 1 => valid_frac = 1 − cloud_frac)"
+  },
+  "cloud_frac": {
+   "value": {
+    "median_pct": 1.35,
+    "mean_pct": 8.10246,
+    "max_pct": 48.48,
+    "share_gt10_pct": 30.8036,
+    "share_zero_pct": 35.2679
+   },
+   "desc": "Облачность чипов BS (meta.cloud_frac)"
+  },
+  "cloud_vs_burned_share_spearman": {
+   "value": {
+    "rho": 0.0286178,
+    "p": 0.670105
+   },
+   "desc": "Ранговая корреляция облачности и доли гари в чипе"
+  },
+  "burned_share_by_cloud": {
+   "value": {
+    "cloud_le10_median_pct": 6.91185,
+    "cloud_gt10_median_pct": 7.70187,
+    "n_gt10": 69,
+    "mannwhitney_p": 0.602845
+   },
+   "desc": "Медианная доля гари в чипах с облачностью <=10% и >10%"
+  },
+  "r1_under_excluded_share": {
+   "value": {
+    "median_pct": 4.85318,
+    "p90_pct": 39.2286
+   },
+   "desc": "Доля r1-пикселей чипа, попавших под исключаемые SCL, %"
+  },
+  "by_landcover_group": {
+   "value": {
+    "forest": {
+     "territory_share_pct": 7.72352,
+     "burned_share_of_group_pct": 3.89042,
+     "share_of_all_burned_pct": 2.98597,
+     "sev_share_pct": [
+      50.9434,
+      38.2428,
+      10.8138
+     ],
+     "burned_px": 176441
+    },
+    "grass": {
+     "territory_share_pct": 34.9341,
+     "burned_share_of_group_pct": 11.7099,
+     "share_of_all_burned_pct": 40.6516,
+     "sev_share_pct": [
+      36.9135,
+      39.0677,
+      24.0189
+     ],
+     "burned_px": 2402105
+    },
+    "crop": {
+     "territory_share_pct": 50.4258,
+     "burned_share_of_group_pct": 10.5542,
+     "share_of_all_burned_pct": 52.8873,
+     "sev_share_pct": [
+      41.8725,
+      36.1611,
+      21.9664
+     ],
+     "burned_px": 3125114
+    },
+    "wetland": {
+     "territory_share_pct": 6.91651,
+     "burned_share_of_group_pct": 5.05593,
+     "share_of_all_burned_pct": 3.47505,
+     "sev_share_pct": [
+      37.8507,
+      27.4051,
+      34.7442
+     ],
+     "burned_px": 205341
+    }
+   },
+   "desc": "Гарь и степень по группам покрова (пороги dNBR свои для каждой группы)"
+  },
+  "by_landcover_code": {
+   "value": {
+    "10": {
+     "name": "деревья",
+     "px": 4526427,
+     "burned_share_pct": 3.89608,
+     "sev_share_pct": [
+      50.9263,
+      38.2545,
+      10.8192
+     ]
+    },
+    "20": {
+     "name": "кустарник",
+     "px": 8844,
+     "burned_share_pct": 0.995025,
+     "sev_share_pct": [
+      85.2273,
+      14.7727,
+      0.0
+     ]
+    },
+    "30": {
+     "name": "травы",
+     "px": 19825456,
+     "burned_share_pct": 12.0803,
+     "sev_share_pct": [
+      36.7577,
+      39.1547,
+      24.0876
+     ]
+    },
+    "40": {
+     "name": "пашня",
+     "px": 29610177,
+     "burned_share_pct": 10.5542,
+     "sev_share_pct": [
+      41.8725,
+      36.1611,
+      21.9664
+     ]
+    },
+    "50": {
+     "name": "застройка",
+     "px": 555226,
+     "burned_share_pct": 0.82615,
+     "sev_share_pct": [
+      91.5849,
+      7.06344,
+      1.35165
+     ]
+    },
+    "60": {
+     "name": "голый грунт",
+     "px": 132736,
+     "burned_share_pct": 1.91357,
+     "sev_share_pct": [
+      85.0394,
+      14.8031,
+      0.15748
+     ]
+    },
+    "80": {
+     "name": "вода",
+     "px": 1996908,
+     "burned_share_pct": 0.0184786,
+     "sev_share_pct": [
+      85.6369,
+      11.9241,
+      2.43902
+     ]
+    },
+    "90": {
+     "name": "болота",
+     "px": 2064482,
+     "burned_share_pct": 9.9285,
+     "sev_share_pct": [
+      37.7647,
+      27.433,
+      34.8023
+     ]
+    }
+   },
+   "desc": "Гарь и степень по кодам WorldCover"
+  },
+  "by_year": {
+   "value": {
+    "2019": {
+     "chips": 11,
+     "burned_share_pct": 16.3703,
+     "sev_share_pct": [
+      43.3392,
+      34.7462,
+      21.9146
+     ],
+     "median_area_ha": 1290.84,
+     "median_cloud_pct": 8.52
+    },
+    "2020": {
+     "chips": 71,
+     "burned_share_pct": 10.2077,
+     "sev_share_pct": [
+      41.5108,
+      35.7745,
+      22.7147
+     ],
+     "median_area_ha": 812.76,
+     "median_cloud_pct": 0.55
+    },
+    "2021": {
+     "chips": 11,
+     "burned_share_pct": 9.8457,
+     "sev_share_pct": [
+      61.9579,
+      26.8237,
+      11.2184
+     ],
+     "median_area_ha": 1153.44,
+     "median_cloud_pct": 2.88
+    },
+    "2022": {
+     "chips": 31,
+     "burned_share_pct": 13.3316,
+     "sev_share_pct": [
+      30.1602,
+      46.8784,
+      22.9614
+     ],
+     "median_area_ha": 792.96,
+     "median_cloud_pct": 3.15
+    },
+    "2023": {
+     "chips": 18,
+     "burned_share_pct": 8.96443,
+     "sev_share_pct": [
+      40.3371,
+      37.0418,
+      22.6211
+     ],
+     "median_area_ha": 805.46,
+     "median_cloud_pct": 6.38
+    },
+    "2024": {
+     "chips": 82,
+     "burned_share_pct": 8.12615,
+     "sev_share_pct": [
+      39.865,
+      34.7991,
+      25.3359
+     ],
+     "median_area_ha": 578.72,
+     "median_cloud_pct": 0.475
+    }
+   },
+   "desc": "Гарь и степень по годам (дата «после»)"
+  },
+  "by_lon_band": {
+   "value": {
+    "38–40° в.д.": {
+     "chips": 32,
+     "burned_share_pct": 7.68434,
+     "sev_share_pct": [
+      26.1608,
+      38.8789,
+      34.9603
+     ],
+     "median_area_ha": 562.26,
+     "median_cloud_pct": 0.985
+    },
+    "40–42° в.д.": {
+     "chips": 76,
+     "burned_share_pct": 10.413,
+     "sev_share_pct": [
+      44.6935,
+      33.8721,
+      21.4344
+     ],
+     "median_area_ha": 942.58,
+     "median_cloud_pct": 2.56
+    },
+    "42–44° в.д.": {
+     "chips": 63,
+     "burned_share_pct": 8.44791,
+     "sev_share_pct": [
+      42.4907,
+      32.6952,
+      24.8141
+     ],
+     "median_area_ha": 684.32,
+     "median_cloud_pct": 0.49
+    },
+    "44–46° в.д.": {
+     "chips": 32,
+     "burned_share_pct": 8.36865,
+     "sev_share_pct": [
+      41.2997,
+      34.6432,
+      24.0571
+     ],
+     "median_area_ha": 578.72,
+     "median_cloud_pct": 0.65
+    },
+    "46–48° в.д.": {
+     "chips": 21,
+     "burned_share_pct": 19.8479,
+     "sev_share_pct": [
+      35.1708,
+      49.3852,
+      15.4439
+     ],
+     "median_area_ha": 2306.2,
+     "median_cloud_pct": 4.05
+    }
+   },
+   "desc": "Гарь и степень по полосам долготы центра чипа"
+  },
+  "extent": {
+   "value": {
+    "lon_min": 38.6841,
+    "lon_max": 47.9607,
+    "lat_min": 45.7111,
+    "lat_max": 51.7984,
+    "epsg": {
+     "32638.0": 115,
+     "32637.0": 109
+    }
+   },
+   "desc": "Охват территории train BS (центры чипов)"
+  },
+  "sev3_share_by_year_kruskal_p": {
+   "value": 0.236691,
+   "desc": "Критерий Краскела-Уоллиса: доля сильной степени в чипе различается по годам?"
+  },
+  "dnbr_empirical_thresholds": {
+   "value": {
+    "forest": {
+     "class1_p0.5": 0.0425,
+     "1|2": 0.27,
+     "1|2_err_share": 0.0419749,
+     "2|3": 0.575,
+     "2|3_err_share": 0.0894922,
+     "statement": [
+      0.1,
+      0.27,
+      0.66
+     ]
+    },
+    "grass": {
+     "class1_p0.5": 0.0425,
+     "1|2": 0.205,
+     "1|2_err_share": 0.0120166,
+     "2|3": 0.385,
+     "2|3_err_share": 0.00871912,
+     "statement": [
+      0.062,
+      0.204,
+      0.386
+     ]
+    },
+    "crop": {
+     "class1_p0.5": 0.0525,
+     "1|2": 0.175,
+     "1|2_err_share": 0.0166003,
+     "2|3": 0.38,
+     "2|3_err_share": 0.00274586,
+     "statement": [
+      0.07,
+      0.177,
+      0.38
+     ]
+    },
+    "wetland": {
+     "class1_p0.5": 0.0275,
+     "1|2": 0.33,
+     "1|2_err_share": 0.0165974,
+     "2|3": 0.61,
+     "2|3_err_share": 0.0740099,
+     "statement": [
+      0.075,
+      0.331,
+      0.677
+     ]
+    }
+   },
+   "desc": "Эмпирические границы классов по медианному dNBR (минимум ошибок между соседними классами) vs пороги постановки"
+  },
+  "dnbr_within_class_interval": {
+   "value": {
+    "forest": {
+     "1": 0.881854,
+     "2": 0.94238,
+     "3": 0.489491
+    },
+    "grass": {
+     "1": 0.956811,
+     "2": 0.980199,
+     "3": 0.999156
+    },
+    "crop": {
+     "1": 0.933535,
+     "2": 0.995586,
+     "3": 1.0
+    },
+    "wetland": {
+     "1": 0.952832,
+     "2": 0.974215,
+     "3": 0.826503
+    }
+   },
+   "desc": "Доля пикселей класса k, у которых медианный dNBR в интервале порогов класса k (по гистограмме, шаг 0,005)"
+  }
+ },
+ "sar": {
+  "auc": {
+   "value": {
+    "all": {
+     "forest": {
+      "dnbr": {
+       "auc": 0.950862,
+       "sep": 0.950862,
+       "direction": "burned higher"
+      },
+      "dvv": {
+       "auc": 0.469808,
+       "sep": 0.530192,
+       "direction": "burned lower"
+      },
+      "dvh": {
+       "auc": 0.44834,
+       "sep": 0.55166,
+       "direction": "burned lower"
+      },
+      "dvv7": {
+       "auc": 0.443153,
+       "sep": 0.556847,
+       "direction": "burned lower"
+      },
+      "dvh7": {
+       "auc": 0.38018,
+       "sep": 0.61982,
+       "direction": "burned lower"
+      }
+     },
+     "grass_crop": {
+      "dnbr": {
+       "auc": 0.944117,
+       "sep": 0.944117,
+       "direction": "burned higher"
+      },
+      "dvv": {
+       "auc": 0.512003,
+       "sep": 0.512003,
+       "direction": "burned higher"
+      },
+      "dvh": {
+       "auc": 0.471286,
+       "sep": 0.528714,
+       "direction": "burned lower"
+      },
+      "dvv7": {
+       "auc": 0.515782,
+       "sep": 0.515782,
+       "direction": "burned higher"
+      },
+      "dvh7": {
+       "auc": 0.452306,
+       "sep": 0.547694,
+       "direction": "burned lower"
+      }
+     },
+     "all": {
+      "dnbr": {
+       "auc": 0.945856,
+       "sep": 0.945856,
+       "direction": "burned higher"
+      },
+      "dvv": {
+       "auc": 0.506366,
+       "sep": 0.506366,
+       "direction": "burned higher"
+      },
+      "dvh": {
+       "auc": 0.464068,
+       "sep": 0.535932,
+       "direction": "burned lower"
+      },
+      "dvv7": {
+       "auc": 0.508567,
+       "sep": 0.508567,
+       "direction": "burned higher"
+      },
+      "dvh7": {
+       "auc": 0.441134,
+       "sep": 0.558866,
+       "direction": "burned lower"
+      }
+     }
+    },
+    "rule1": {
+     "forest": {
+      "dnbr": {
+       "auc": 0.766212,
+       "sep": 0.766212,
+       "direction": "burned higher"
+      },
+      "dvv": {
+       "auc": 0.471921,
+       "sep": 0.528079,
+       "direction": "burned lower"
+      },
+      "dvh": {
+       "auc": 0.43954,
+       "sep": 0.56046,
+       "direction": "burned lower"
+      },
+      "dvv7": {
+       "auc": 0.450234,
+       "sep": 0.549766,
+       "direction": "burned lower"
+      },
+      "dvh7": {
+       "auc": 0.380442,
+       "sep": 0.619558,
+       "direction": "burned lower"
+      }
+     },
+     "grass_crop": {
+      "dnbr": {
+       "auc": 0.68535,
+       "sep": 0.68535,
+       "direction": "burned higher"
+      },
+      "dvv": {
+       "auc": 0.520451,
+       "sep": 0.520451,
+       "direction": "burned higher"
+      },
+      "dvh": {
+       "auc": 0.494982,
+       "sep": 0.505018,
+       "direction": "burned lower"
+      },
+      "dvv7": {
+       "auc": 0.523183,
+       "sep": 0.523183,
+       "direction": "burned higher"
+      },
+      "dvh7": {
+       "auc": 0.488699,
+       "sep": 0.511301,
+       "direction": "burned lower"
+      }
+     },
+     "all": {
+      "dnbr": {
+       "auc": 0.694651,
+       "sep": 0.694651,
+       "direction": "burned higher"
+      },
+      "dvv": {
+       "auc": 0.513781,
+       "sep": 0.513781,
+       "direction": "burned higher"
+      },
+      "dvh": {
+       "auc": 0.484152,
+       "sep": 0.515848,
+       "direction": "burned lower"
+      },
+      "dvv7": {
+       "auc": 0.515359,
+       "sep": 0.515359,
+       "direction": "burned higher"
+      },
+      "dvh7": {
+       "auc": 0.472919,
+       "sep": 0.527081,
+       "direction": "burned lower"
+      }
+     }
+    }
+   },
+   "desc": "AUC одного признака (гарь vs не гарь), sep = max(AUC, 1−AUC); all — все пиксели с покрытием S1 и без исключ. SCL; rule1 — только r1"
+  },
+  "median_change": {
+   "value": {
+    "forest": {
+     "dnbr": {
+      "median_burned": 0.24375,
+      "median_unburned": 0.03125,
+      "diff": 0.2125
+     },
+     "dvv": {
+      "median_burned": -0.375,
+      "median_unburned": -0.125,
+      "diff": -0.25
+     },
+     "dvh": {
+      "median_burned": -0.525,
+      "median_unburned": -0.025,
+      "diff": -0.5
+     },
+     "dvv7": {
+      "median_burned": -0.425,
+      "median_unburned": -0.175,
+      "diff": -0.25
+     },
+     "dvh7": {
+      "median_burned": -0.675,
+      "median_unburned": -0.125,
+      "diff": -0.55
+     }
+    },
+    "grass_crop": {
+     "dnbr": {
+      "median_burned": 0.23375,
+      "median_unburned": 0.00375,
+      "diff": 0.23
+     },
+     "dvv": {
+      "median_burned": 0.025,
+      "median_unburned": -0.125,
+      "diff": 0.15
+     },
+     "dvh": {
+      "median_burned": -0.725,
+      "median_unburned": -0.275,
+      "diff": -0.45
+     },
+     "dvv7": {
+      "median_burned": -0.075,
+      "median_unburned": -0.175,
+      "diff": 0.1
+     },
+     "dvh7": {
+      "median_burned": -0.725,
+      "median_unburned": -0.325,
+      "diff": -0.4
+     }
+    },
+    "all": {
+     "dnbr": {
+      "median_burned": 0.23625,
+      "median_unburned": 0.00625,
+      "diff": 0.23
+     },
+     "dvv": {
+      "median_burned": -0.025,
+      "median_unburned": -0.125,
+      "diff": 0.1
+     },
+     "dvh": {
+      "median_burned": -0.825,
+      "median_unburned": -0.275,
+      "diff": -0.55
+     },
+     "dvv7": {
+      "median_burned": -0.175,
+      "median_unburned": -0.225,
+      "diff": 0.05
+     },
+     "dvh7": {
+      "median_burned": -0.825,
+      "median_unburned": -0.325,
+      "diff": -0.5
+     }
+    }
+   },
+   "desc": "Медианы признаков для гари и не гари (дБ для SAR)"
+  },
+  "coverage": {
+   "value": {
+    "chips_partial_pct": 21.4286,
+    "chips_no_s1_pct": 0.0,
+    "chips_partial_n": 48,
+    "chips_no_s1_n": 0,
+    "mean_nocov_px_pct": 12.9039,
+    "pre_partial_n": 30,
+    "post_partial_n": 33
+   },
+   "desc": "Покрытие Sentinel-1: чипы с частичным (0 = нет данных) или полным отсутствием радара"
+  },
+  "speckle": {
+   "value": {
+    "n_blocks": 74170,
+    "n_chips": 218,
+    "std_vv_db_median": 1.58857,
+    "enl_vv_median": 7.68014,
+    "std_vh_db_median": 2.08541,
+    "enl_vh_median": 4.38959,
+    "pixel_noise_dvv": 2.13022,
+    "block7_noise_dvv": 0.977003,
+    "pixel_noise_dvh": 2.92961,
+    "block7_noise_dvh": 1.50234,
+    "pixel_noise_dnbr": 0.00916301,
+    "block7_noise_dnbr": 0.0279882,
+    "snr_pixel_dvv": 0.0469434,
+    "snr_block7_dvv": 0.102354,
+    "snr_pixel_dvh": 0.187739,
+    "snr_block7_dvh": 0.366095,
+    "snr_pixel_dnbr": 25.1009,
+    "snr_block7_dnbr": 8.21775
+   },
+   "desc": "Шум в однородных блоках 7x7 без гари: СКО дБ, ENL (линейная мощность), шум разности на пиксель и после усреднения 7x7, SNR = |Δмедиан гарь−фон| / шум"
+  }
+ },
+ "region": {
+  "cut_boundary_share_pct": {
+   "value": 50.9822,
+   "desc": "Доля граничных пикселей гари, за которыми правило разрешает гарь, но эталон «не горело» (срезанная граница), %"
+  },
+  "ransac_circles": {
+   "value": {
+    "n_circles": 994,
+    "chips_with_circles": 201,
+    "radius_km_median": 2.36342,
+    "radius_km_p25": 1.69179,
+    "radius_km_p75": 3.13294,
+    "cut_px_on_circles_pct": 27.7023
+   },
+   "desc": "RANSAC-окружности по срезанной границе (допуск 1,5 пикс., дуга >= 60°, R 0,2-8 км)"
+  },
+  "af_bs_link": {
+   "value": {
+    "bs_chips_covered_by_af_in_window": 39,
+    "bs_chips_with_hotspots_within_10km": 26,
+    "bs_chips_with_hotspots_inside": 18
+   },
+   "desc": "Связка BS–AF: чипы BS, покрытые чипом AF с датой в [date_pre−3 дн, date_post+3 дн], и с эталонными очагами AF рядом/внутри"
+  },
+  "hotspot_distance": {
+   "value": {
+    "burned_dist_km_p50": 1.15,
+    "burned_dist_km_p80": 2.55,
+    "burned_dist_km_p90": 3.25,
+    "burned_dist_km_p95": 3.85,
+    "cand_unburned_dist_km_p10": 1.35,
+    "cand_unburned_dist_km_p50": 4.95,
+    "p_burned_given_cand_by_km": {
+     "0-1": 0.830994,
+     "1-2": 0.762698,
+     "2-3": 0.647502,
+     "3-4": 0.350111,
+     "4-5": 0.1076,
+     "5-6": 0.0662182,
+     "6-7": 0.0455018,
+     "7-8": 0.0235515
+    },
+    "iou_by_radius": {
+     "0.50": 0.268087,
+     "0.75": 0.349049,
+     "1.00": 0.409683,
+     "1.25": 0.461143,
+     "1.50": 0.51175,
+     "1.75": 0.555919,
+     "2.00": 0.593164,
+     "2.25": 0.624811,
+     "2.50": 0.649601,
+     "2.75": 0.672646,
+     "3.00": 0.686586,
+     "3.25": 0.685937,
+     "3.50": 0.68176,
+     "3.75": 0.67722,
+     "4.00": 0.670503,
+     "4.25": 0.656202,
+     "4.50": 0.64004,
+     "4.75": 0.625592,
+     "5.00": 0.612377,
+     "5.25": 0.599525,
+     "5.50": 0.587057,
+     "5.75": 0.575597,
+     "6.00": 0.564728,
+     "6.25": 0.553755,
+     "6.50": 0.544467,
+     "6.75": 0.535979,
+     "7.00": 0.52718,
+     "7.25": 0.519534,
+     "7.50": 0.511973,
+     "7.75": 0.503866,
+     "8.00": 0.497389,
+     "8.25": 0.491302,
+     "8.50": 0.486002,
+     "8.75": 0.482138,
+     "9.00": 0.478311,
+     "9.25": 0.474606,
+     "9.50": 0.471455,
+     "9.75": 0.468612,
+     "10.00": 0.466638
+    },
+    "best_radius_km": 3.0,
+    "best_iou": 0.686586,
+    "rule_only_iou_same_chips": 0.459002,
+    "per_chip": [
+     {
+      "cid": "BS_tr_000003",
+      "n_hot_inside": 20,
+      "n_cut": 1635,
+      "burned_px": 62174,
+      "iou_rule_only": 0.846375,
+      "iou_buffer_3km": 0.803732,
+      "best_R_km": 4.75,
+      "best_iou": 0.867297
+     },
+     {
+      "cid": "BS_tr_000004",
+      "n_hot_inside": 17,
+      "n_cut": 2818,
+      "burned_px": 57655,
+      "iou_rule_only": 0.268364,
+      "iou_buffer_3km": 0.806355,
+      "best_R_km": 3.25,
+      "best_iou": 0.826115
+     },
+     {
+      "cid": "BS_tr_000015",
+      "n_hot_inside": 2,
+      "n_cut": 250,
+      "burned_px": 7317,
+      "iou_rule_only": 0.346369,
+      "iou_buffer_3km": 0.846831,
+      "best_R_km": 3.0,
+      "best_iou": 0.846831
+     },
+     {
+      "cid": "BS_tr_000046",
+      "n_hot_inside": 5,
+      "n_cut": 1599,
+      "burned_px": 11089,
+      "iou_rule_only": 0.296767,
+      "iou_buffer_3km": 0.62391,
+      "best_R_km": 3.0,
+      "best_iou": 0.62391
+     },
+     {
+      "cid": "BS_tr_000070",
+      "n_hot_inside": 4,
+      "n_cut": 1399,
+      "burned_px": 20796,
+      "iou_rule_only": 0.422635,
+      "iou_buffer_3km": 0.0709656,
+      "best_R_km": 9.75,
+      "best_iou": 0.422866
+     },
+     {
+      "cid": "BS_tr_000080",
+      "n_hot_inside": 29,
+      "n_cut": 2242,
+      "burned_px": 20319,
+      "iou_rule_only": 0.450219,
+      "iou_buffer_3km": 0.656027,
+      "best_R_km": 3.5,
+      "best_iou": 0.660155
+     },
+     {
+      "cid": "BS_tr_000083",
+      "n_hot_inside": 13,
+      "n_cut": 843,
+      "burned_px": 14721,
+      "iou_rule_only": 0.673117,
+      "iou_buffer_3km": 0.811929,
+      "best_R_km": 4.5,
+      "best_iou": 0.812112
+     },
+     {
+      "cid": "BS_tr_000084",
+      "n_hot_inside": 16,
+      "n_cut": 1067,
+      "burned_px": 11466,
+      "iou_rule_only": 0.610246,
+      "iou_buffer_3km": 0.808694,
+      "best_R_km": 4.0,
+      "best_iou": 0.85148
+     },
+     {
+      "cid": "BS_tr_000101",
+      "n_hot_inside": 36,
+      "n_cut": 2146,
+      "burned_px": 42358,
+      "iou_rule_only": 0.729816,
+      "iou_buffer_3km": 0.867678,
+      "best_R_km": 3.5,
+      "best_iou": 0.887978
+     },
+     {
+      "cid": "BS_tr_000109",
+      "n_hot_inside": 51,
+      "n_cut": 2459,
+      "burned_px": 83772,
+      "iou_rule_only": 0.731017,
+      "iou_buffer_3km": 0.908009,
+      "best_R_km": 3.0,
+      "best_iou": 0.908009
+     },
+     {
+      "cid": "BS_tr_000173",
+      "n_hot_inside": 9,
+      "n_cut": 3450,
+      "burned_px": 24725,
+      "iou_rule_only": 0.303911,
+      "iou_buffer_3km": 0.697344,
+      "best_R_km": 3.25,
+      "best_iou": 0.718849
+     },
+     {
+      "cid": "BS_tr_000188",
+      "n_hot_inside": 3,
+      "n_cut": 935,
+      "burned_px": 32284,
+      "iou_rule_only": 0.774899,
+      "iou_buffer_3km": 0.481464,
+      "best_R_km": 5.5,
+      "best_iou": 0.777379
+     },
+     {
+      "cid": "BS_tr_000193",
+      "n_hot_inside": 35,
+      "n_cut": 1007,
+      "burned_px": 28813,
+      "iou_rule_only": 0.480155,
+      "iou_buffer_3km": 0.481015,
+      "best_R_km": 2.25,
+      "best_iou": 0.496488
+     },
+     {
+      "cid": "BS_tr_000202",
+      "n_hot_inside": 82,
+      "n_cut": 579,
+      "burned_px": 43973,
+      "iou_rule_only": 0.907208,
+      "iou_buffer_3km": 0.928065,
+      "best_R_km": 2.5,
+      "best_iou": 0.928972
+     },
+     {
+      "cid": "BS_tr_000203",
+      "n_hot_inside": 4,
+      "n_cut": 311,
+      "burned_px": 636,
+      "iou_rule_only": 0.00801041,
+      "iou_buffer_3km": 0.0383184,
+      "best_R_km": 0.5,
+      "best_iou": 0.254598
+     },
+     {
+      "cid": "BS_tr_000206",
+      "n_hot_inside": 9,
+      "n_cut": 800,
+      "burned_px": 12231,
+      "iou_rule_only": 0.488764,
+      "iou_buffer_3km": 0.825851,
+      "best_R_km": 3.5,
+      "best_iou": 0.835619
+     },
+     {
+      "cid": "BS_tr_000207",
+      "n_hot_inside": 11,
+      "n_cut": 649,
+      "burned_px": 2222,
+      "iou_rule_only": 0.0683783,
+      "iou_buffer_3km": 0.174749,
+      "best_R_km": 0.75,
+      "best_iou": 0.283397
+     },
+     {
+      "cid": "BS_tr_000220",
+      "n_hot_inside": 8,
+      "n_cut": 606,
+      "burned_px": 8266,
+      "iou_rule_only": 0.232283,
+      "iou_buffer_3km": 0.521156,
+      "best_R_km": 1.0,
+      "best_iou": 0.758327
+     }
+    ],
+    "per_chip_best_radius_km_median": 3.25,
+    "per_chip_best_radius_km_iqr": [
+     2.625,
+     3.875
+    ],
+    "circle_center_to_nearest_hotspot_km_median": 1.46903,
+    "circle_center_within_1km_pct": 28.3784,
+    "circle_center_within_radius_pct": 60.8108
+   },
+   "desc": "Расстояния до ближайшего эталонного очага AF (чипы BS с очагами внутри), IoU(r1 ∩ буфер R) и центры окружностей"
+  },
+  "example_chips": {
+   "value": [
+    "BS_tr_000004",
+    "BS_tr_000109",
+    "BS_tr_000206"
+   ],
+   "desc": "Чипы на рис. eda_bs_region.png"
+  }
+ },
+ "shift": {
+  "n_test": {
+   "value": {
+    "af": 180,
+    "bs": 89
+   },
+   "desc": "Число тестовых чипов AF и BS"
+  },
+  "bs_cloud_frac": {
+   "value": {
+    "train_median_pct": 1.35,
+    "test_median_pct": 2.55,
+    "train_mean_pct": 8.10246,
+    "test_mean_pct": 12.0884,
+    "train_max_pct": 48.48,
+    "test_max_pct": 49.57,
+    "train_gt10_pct": 30.8036,
+    "test_gt10_pct": 33.7079,
+    "ks_stat": 0.171298,
+    "ks_p": 0.0410151
+   },
+   "desc": "Облачность BS: train vs test (meta.cloud_frac)"
+  },
+  "af_valid_frac_meta": {
+   "value": {
+    "train_median": 1.0,
+    "test_median": 1.0,
+    "train_lt1_pct": 3.33333,
+    "test_lt1_pct": 2.77778,
+    "train_lt09_n": 10,
+    "test_lt09_n": 3,
+    "ks_p": 1.0
+   },
+   "desc": "Доля валидных пикселей AF (meta.valid_frac): train vs test"
+  },
+  "train_vs_test": {
+   "value": {
+    "af_night_chips_pct": {
+     "train": 30.2381,
+     "test": 38.3333
+    },
+    "af_chips_nan_gt10_pct": {
+     "train": 28.3333,
+     "test": 35.5556
+    },
+    "af_chips_stripe_nan_gt1_pct": {
+     "train": 52.1429,
+     "test": 56.6667
+    },
+    "af_chips_outside_swath_pct": {
+     "train": 3.33333,
+     "test": 2.77778
+    },
+    "af_rule_hot_px_per_chip_median": {
+     "train": 11.0,
+     "test": 11.0
+    },
+    "af_chips_with_rule_hot_pct": {
+     "train": 73.5714,
+     "test": 78.8889
+    },
+    "bs_cloud_gt10_pct": {
+     "train": 30.8036,
+     "test": 33.7079
+    },
+    "bs_s1_partial_pct": {
+     "train": 21.4286,
+     "test": 22.4719
+    },
+    "bs_excluded_scl_median_pct": {
+     "train": 2.82555,
+     "test": 3.91846
+    }
+   },
+   "desc": "Сравнение train/test по характеристикам снимков (без геопривязки теста)"
+  },
+  "af_nanfrac_ks_p": {
+   "value": 0.267259,
+   "desc": "KS-тест доли NaN(I4) AF train vs test"
+  },
+  "af_rule_hot_ks_p": {
+   "value": 0.85055,
+   "desc": "KS-тест числа пикселей выше порогов VNP14IMG на чип, train vs test"
+  }
+ },
+ "_meta": {
+  "script": "scripts/eda_report.py",
+  "data_dir": "/path/to/train",
+  "n_bs_chips_used": 224,
+  "runtime_s": 45.6,
+  "notes": "Все доли в %, если в ключе есть _pct; dNBR — по firemon.bs.rules.dnbr (медиана 3x3), пороги THRESHOLDS; AF-пороги — firemon.af.features DAY_POT/NIGHT_POT/NIGHT_SZA."
+ }
+}
