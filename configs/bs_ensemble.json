@@ -1,0 +1,102 @@
+{
+ "_comment": "Состав ансамбля модуля гарей. Веса бленда и порог подобраны по OOF 5-fold (scripts/bs_blend_search.py); сети обучаются на всём train (train.py).",
+ "cnn": [
+  {
+   "name": "ctx2_s2",
+   "args": {
+    "epochs": 150,
+    "crop": 512,
+    "bs": 8,
+    "target": "region",
+    "ctx": 2,
+    "scale": 2,
+    "cache": true,
+    "seed": 42
+   }
+  },
+  {
+   "name": "unetpp_ctx_s2",
+   "args": {
+    "epochs": 150,
+    "crop": 512,
+    "bs": 8,
+    "target": "region",
+    "ctx": true,
+    "scale": 2,
+    "cache": true,
+    "arch": "unetpp"
+   }
+  },
+  {
+   "name": "rgy16_s42",
+   "args": {
+    "epochs": 150,
+    "crop": 512,
+    "bs": 8,
+    "target": "region",
+    "ctx": true,
+    "scale": 2,
+    "cache": true,
+    "encoder": "tu-regnety_016",
+    "seed": 42
+   }
+  },
+  {
+   "name": "rgy16_s7",
+   "args": {
+    "epochs": 150,
+    "crop": 512,
+    "bs": 8,
+    "target": "region",
+    "ctx": true,
+    "scale": 2,
+    "cache": true,
+    "encoder": "tu-regnety_016",
+    "seed": 7
+   }
+  },
+  {
+   "name": "rgy32",
+   "args": {
+    "epochs": 150,
+    "crop": 512,
+    "bs": 8,
+    "target": "region",
+    "ctx": true,
+    "scale": 2,
+    "cache": true,
+    "encoder": "tu-regnety_032"
+   }
+  }
+ ],
+ "gbdt": {
+  "block": 2,
+  "rounds": 800,
+  "sparse": true,
+  "_comment": "sparse: в инференсе деревья считаются для «шахматной» половины блоков 40 м, остальные — среднее соседей (OOF бленда 0.4940 -> 0.4937, работа CPU вдвое меньше)"
+ },
+ "blend": {
+  "sources": [
+   "gbdt_s1",
+   "ctx2_s2",
+   "unetpp_ctx_s2",
+   "rgy16_s42",
+   "rgy16_s7",
+   "rgy32"
+  ],
+  "weights": [
+   1.0,
+   0.5,
+   0.5,
+   1.0,
+   1.0,
+   1.0
+  ],
+  "threshold": 0.475
+ },
+ "tta": 8,
+ "severity_mode": "class_median",
+ "_comment_severity": "class_median: класс по сырому dNBR -> исключённые по SCL в 0 -> медиана 3x3 по растру классов (так устроен эталон; OOF 0.4937 -> 0.4960, прирост на всех 5 фолдах). legacy: медиана dNBR -> класс (правило входных признаков моделей, не меняется)",
+ "min_area_px": 25,
+ "_comment_min_area": "минимальная площадь объекта эталона: все связные гари в train >= 25 px (1 га, 8-связность); на OOF +0.0007 на каждом фолде"
+}
