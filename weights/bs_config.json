@@ -1,0 +1,54 @@
+{
+ "cnn": [
+  {
+   "file": "bs_ctx2_s2.pt",
+   "group": "ctx2_s2"
+  },
+  {
+   "file": "bs_unetpp_ctx_s2.pt",
+   "group": "unetpp_ctx_s2"
+  },
+  {
+   "file": "bs_rgy16_s42.pt",
+   "group": "rgy16_s42"
+  },
+  {
+   "file": "bs_rgy16_s7.pt",
+   "group": "rgy16_s7"
+  },
+  {
+   "file": "bs_rgy32.pt",
+   "group": "rgy32"
+  }
+ ],
+ "threshold": 0.475,
+ "gate": true,
+ "cloud": true,
+ "tta": 8,
+ "gbdt": {
+  "block": 2,
+  "s1": [
+   "bs_gbdt_s1.txt"
+  ],
+  "sparse": true
+ },
+ "blend_sources": [
+  "gbdt_s1",
+  "ctx2_s2",
+  "unetpp_ctx_s2",
+  "rgy16_s42",
+  "rgy16_s7",
+  "rgy32"
+ ],
+ "blend_weights": [
+  1.0,
+  0.5,
+  0.5,
+  1.0,
+  1.0,
+  1.0
+ ],
+ "final": "blend",
+ "severity_mode": "class_median",
+ "min_area_px": 25
+}

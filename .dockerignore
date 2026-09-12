@@ -1,0 +1,18 @@
+# Контекст сборки образа решения — корень репозитория, а в образ идёт только
+# то, что перечислено в COPY (код, конфигурации, веса). Остальное исключаем,
+# чтобы не отправлять в демон сотни мегабайт.
+# (у образа сервиса свой список — service/Dockerfile.dockerignore)
+.git
+.gitignore
+**/.venv
+**/__pycache__
+**/*.pyc
+.pytest_cache
+data
+runs
+out
+weights_new
+submissions
+reports
+service/data/quicklooks
+*.log
