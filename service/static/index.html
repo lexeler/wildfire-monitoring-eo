@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111417">
+  <meta name="color-scheme" content="dark">
+  <title>Мониторинг природных пожаров</title>
+  <meta name="description" content="Термоточки VIIRS, контуры гарей и степень поражения по Sentinel-2: запрос по территории и периоду, справка и выгрузка.">
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/static/vendor/maplibre/maplibre-gl.css">
+  <link rel="stylesheet" href="/static/css/app.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><defs><linearGradient id="bmBg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a1d16"/><stop offset="1" stop-color="#140f0c"/></linearGradient></defs><rect width="32" height="32" rx="9" fill="url(#bmBg)"/><rect x=".5" y=".5" width="31" height="31" rx="8.5" fill="none" stroke="#ff7a3d" stroke-opacity=".35"/><path d="M16.4 5c.6 3.6-1.3 5.6-3.2 7.6-1.7 1.8-3.2 3.6-3.2 6.4A6 6 0 0 0 16 25a6 6 0 0 0 6-6c0-2.1-.9-3.7-2-5.1-.2 1.5-1 2.6-2.2 3 .6-3.8-.2-8.4-1.4-11.9Z" fill="#ec7c30"/><path d="M16 25a3.2 3.2 0 0 1-3.2-3.2c0-1.9 1.6-2.9 2.4-4.6.9 1.2 1.2 2.4 1.1 3.4.8-.2 1.5-.8 1.8-1.7.7.9 1.1 1.8 1.1 2.9A3.2 3.2 0 0 1 16 25Z" fill="#f2c14e"/></svg>
+      <div class="brand-text">
+        <h1>Мониторинг природных пожаров</h1>
+        <p>Нижнее Поволжье и Подонье · термоточки VIIRS 375 м · гари Sentinel-2 20 м</p>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <span class="catalog-status" id="catalogStatus">Загрузка каталога…</span>
+      <div class="src-switch">
+        <span class="qb-label">Источник</span>
+        <div class="seg" id="sourceSeg" role="group" aria-label="Источник данных">
+          <button type="button" data-source="model" title="Результаты модели LitWin">Модель</button>
+          <button type="button" data-source="reference" title="Эталонная разметка организаторов">Эталон</button>
+        </div>
+      </div>
+      <a class="api-link" href="/docs" target="_blank" rel="noopener">REST API <span aria-hidden="true">↗</span></a>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="map-col">
+      <form class="querybar" id="queryForm" autocomplete="off">
+        <div class="qb-group">
+          <span class="qb-label">Территория</span>
+          <div class="seg" id="territorySeg" role="group" aria-label="Территория запроса">
+            <button type="button" data-mode="all" class="on">Весь каталог</button>
+            <button type="button" data-mode="aoi" title="Граница территории мониторинга (AOI)">AOI</button>
+            <button type="button" data-mode="bbox" title="Нарисуйте прямоугольник на карте или введите координаты">
+              <svg viewBox="0 0 16 16" aria-hidden="true"><rect x="2.5" y="3.5" width="11" height="9" rx="1" fill="none" stroke="currentColor" stroke-width="1.4" stroke-dasharray="2 1.6"/></svg>Прямоугольник</button>
+            <button type="button" data-mode="polygon" title="Щелчками по карте задайте вершины, двойной щелчок — завершить">
+              <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 11.5 5 3.5l7.5 2-1 7-8.5-1Z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>Полигон</button>
+            <button type="button" data-mode="file" title="Загрузить полигон из файла GeoJSON (EPSG:4326)">
+              <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2.5v8M4.8 7.4 8 10.6l3.2-3.2M3 13h10" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>GeoJSON</button>
+          </div>
+          <input type="file" id="fileInput" accept=".geojson,.json,application/geo+json,application/json" hidden>
+        </div>
+        <div class="qb-group">
+          <label class="qb-label" for="dateFrom">Период</label>
+          <div class="dates">
+            <input type="date" id="dateFrom" required>
+            <span class="dash">—</span>
+            <input type="date" id="dateTo" required aria-label="Конец периода">
+          </div>
+        </div>
+        <button type="submit" class="btn-primary" id="runBtn"><span class="spinner" aria-hidden="true"></span><span class="lbl">Построить</span></button>
+        <div class="bbox-row" id="bboxRow" hidden>
+          <span class="qb-label">bbox, EPSG:4326</span>
+          <label>minLon <input type="number" step="0.0001" id="bbMinLon"></label>
+          <label>minLat <input type="number" step="0.0001" id="bbMinLat"></label>
+          <label>maxLon <input type="number" step="0.0001" id="bbMaxLon"></label>
+          <label>maxLat <input type="number" step="0.0001" id="bbMaxLat"></label>
+          <span class="hint">или нарисуйте на карте</span>
+        </div>
+      </form>
+
+      <div class="map-wrap">
+        <div id="map" aria-label="Карта"></div>
+        <div class="progress" id="progress" hidden><span></span></div>
+        <div class="toast" id="toast" role="alert" hidden></div>
+        <div class="draw-hint" id="drawHint" hidden></div>
+
+        <button type="button" class="map-card layers-toggle" id="layersToggle" aria-expanded="true" aria-controls="layersPanel">
+          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="m8 2 6 3.2L8 8.4 2 5.2 8 2Zm-6 6 6 3.2L14 8M2 10.8 8 14l6-3.2" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>Слои</button>
+        <div class="map-card layers" id="layersPanel">
+          <div class="card-title">Подложка</div>
+          <div class="seg seg-sm" id="basemapSeg">
+            <button type="button" data-basemap="dark" class="on">Тёмная</button>
+            <button type="button" data-basemap="light">Светлая</button>
+            <button type="button" data-basemap="sat">Спутник</button>
+          </div>
+          <div class="card-title">Слои</div>
+          <label class="chk"><input type="checkbox" data-layer="hotspots" checked><span class="sw sw-hot"></span>Термоточки</label>
+          <label class="chk"><input type="checkbox" data-layer="scars" checked><span class="sw sw-scar"></span>Контуры гарей</label>
+          <label class="chk" title="Попиксельная степень поражения; видна при крупном масштабе (с z11)"><input type="checkbox" data-layer="severity" checked><span class="sw sw-sev"></span>Степень (растр 20 м)</label>
+          <label class="chk"><input type="checkbox" data-layer="chips"><span class="sw sw-chip"></span>Покрытие снимками</label>
+          <label class="chk"><input type="checkbox" data-layer="aoi" checked><span class="sw sw-aoi"></span>Граница AOI</label>
+        </div>
+
+        <div class="map-card legend" id="legend">
+          <div class="legend-row"><span class="dot day"></span>Термоточка, день<span class="dot night"></span>ночь</div>
+          <div class="legend-sev">
+            <span><i style="background:var(--sev1)"></i>слабая</span>
+            <span><i style="background:var(--sev2)"></i>средняя</span>
+            <span><i style="background:var(--sev3)"></i>сильная</span>
+          </div>
+          <div class="legend-note">Степень поражения гари</div>
+        </div>
+
+        <div class="map-card scar-card" id="scarCard" hidden></div>
+
+        <div class="timeline" id="timeline">
+          <div class="tl-head">
+            <span class="tl-title">Лента времени</span>
+            <span class="tl-leg"><i class="tl-hs"></i><span>термоточки<span class="tl-long">, шт./мес.</span></span></span>
+            <span class="tl-leg"><i class="tl-bs"></i><span>гари<span class="tl-long">, га (по дате снимка «после»)</span></span></span>
+            <span class="tl-spacer"></span>
+            <label class="chk chk-inline"><input type="checkbox" id="seasonOnly">годы — только сезон апр–окт</label>
+            <button type="button" class="chip" id="tlAll">Весь период</button>
+          </div>
+          <svg id="tlSvg" role="img" aria-label="Помесячное число термоточек и площадь гарей; протяните мышью, чтобы выбрать период"></svg>
+        </div>
+      </div>
+    </section>
+
+    <aside class="report" id="report" aria-label="Аналитическая справка">
+      <div class="report-head">
+        <div class="eyebrow">Аналитическая справка</div>
+        <div class="report-query" id="reportQuery">—</div>
+      </div>
+      <div class="report-body" id="reportBody">
+        <div class="empty">Выберите территорию и период, затем нажмите «Построить».</div>
+      </div>
+      <div class="report-foot" id="exports">
+        <div class="exp-title">Выгрузка по текущему запросу</div>
+        <div class="exp-grid">
+          <div class="exp-row"><span>Контуры гарей</span>
+            <button type="button" data-exp="scars-geojson">GeoJSON</button><button type="button" data-exp="scars-shp" title="ESRI Shapefile (zip), EPSG:4326">Shapefile</button><button type="button" data-exp="scars-csv">CSV</button></div>
+          <div class="exp-row"><span>Зоны степени</span>
+            <button type="button" data-exp="zones-geojson">GeoJSON</button><button type="button" data-exp="zones-shp" title="ESRI Shapefile (zip), EPSG:4326">Shapefile</button></div>
+          <div class="exp-row"><span>Термоточки</span>
+            <button type="button" data-exp="hs-geojson">GeoJSON</button><button type="button" data-exp="hs-shp" title="ESRI Shapefile (zip), EPSG:4326">Shapefile</button><button type="button" data-exp="hs-csv">CSV</button></div>
+          <div class="exp-row"><span>Справка</span>
+            <button type="button" data-exp="rep-json">JSON</button><button type="button" data-exp="rep-csv" title="Сводные показатели: section, metric, value, unit">CSV</button><button type="button" data-exp="rep-zip" title="JSON и все таблицы CSV (классы, контуры, покров, даты) в одном архиве">ZIP</button></div>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <script src="/static/vendor/maplibre/maplibre-gl.js"></script>
+  <script src="/static/js/app.js"></script>
+</body>
+</html>

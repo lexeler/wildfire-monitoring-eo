@@ -1,0 +1,10 @@
+# Контекст сборки — корень репозитория; в образ попадают только service/ и firemon/
+**
+!service/**
+!firemon/**
+service/.venv
+service/tests
+service/data/catalog.tmp
+**/__pycache__
+**/*.pyc
+**/.pytest_cache

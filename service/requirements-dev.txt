@@ -1,0 +1,7 @@
+# Тесты сервиса
+-r requirements.txt
+pytest==9.1.1
+httpx==0.28.1
+rasterio==1.5.1
+scipy==1.18.1
+pyogrio==0.13.0  # проверка чтения GeoPackage/Shapefile через GDAL

@@ -1,0 +1,11 @@
+# Запуск: docker compose -f service/docker-compose.yml up --build   (из корня репозитория)
+#     или: cd service && docker compose up --build
+services:
+  firemon:
+    build:
+      context: ..
+      dockerfile: service/Dockerfile
+    image: firemon-service:latest
+    ports:
+      - "8000:8000"
+    restart: unless-stopped

@@ -1,0 +1,6 @@
+# Сборка каталога (service/build_catalog.py) и необязательные эндпоинты /api/v1/analyze/*
+-r requirements.txt
+rasterio==1.5.1
+scipy==1.18.1
+pillow==12.3.0
+pandas==3.0.6
