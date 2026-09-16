@@ -1,0 +1,108 @@
+{
+ "_comment": "Сводка OOF-результатов (5-fold по пространственным кластерам); источник — журнал экспериментов и скрипты scripts/*.py",
+ "af": {
+  "fixed_thresholds_f1": 0.891,
+  "final_f1": 0.962,
+  "final_precision": 0.953,
+  "final_recall": 0.971
+ },
+ "bs_ablation": [
+  {
+   "name": "B0  dNBR, шкала USGS",
+   "bs_part": 0.181,
+   "kind": "baseline"
+  },
+  {
+   "name": "B1  + пороги по покрову",
+   "bs_part": 0.243,
+   "kind": "baseline"
+  },
+  {
+   "name": "B2  + медиана 3×3",
+   "bs_part": 0.258,
+   "kind": "baseline"
+  },
+  {
+   "name": "B3  + исключение SCL",
+   "bs_part": 0.304,
+   "kind": "baseline"
+  },
+  {
+   "name": "C1  U-Net, 4 класса, кроп 384",
+   "bs_part": 0.42
+  },
+  {
+   "name": "C2  U-Net, весь чип 512",
+   "bs_part": 0.427
+  },
+  {
+   "name": "C3  цель «область» + маск. лосс",
+   "bs_part": 0.437
+  },
+  {
+   "name": "G3  GBDT области (101 признак)",
+   "bs_part": 0.448
+  },
+  {
+   "name": "C4  + каналы контекста, вход 40 м",
+   "bs_part": 0.456
+  },
+  {
+   "name": "C5  то же, 150 эпох",
+   "bs_part": 0.462
+  },
+  {
+   "name": "C6  + контекст уровня чипа",
+   "bs_part": 0.464
+  },
+  {
+   "name": "C7  UNet++ с контекстом",
+   "bs_part": 0.466
+  },
+  {
+   "name": "C8  энкодер RegNetY-016",
+   "bs_part": 0.481
+  },
+  {
+   "name": "E1  среднее GBDT + сеть",
+   "bs_part": 0.472
+  },
+  {
+   "name": "E5  GBDT + 5 сетей на ResNet-34",
+   "bs_part": 0.486
+  },
+  {
+   "name": "Финал: GBDT + RegNetY ×3 + 2 сети ResNet-34",
+   "bs_part": 0.497,
+   "final": true
+  }
+ ],
+ "bs_final": {
+  "iou_burn": 0.7573,
+  "miou_sev": 0.7722,
+  "iou_sev": [
+   0.6337,
+   0.7982,
+   0.8847
+  ],
+  "bs_part": 0.4967
+ },
+ "score_oof": 0.8334,
+ "inference": {
+  "rtx3060_12cores_s": 25.1,
+  "docker_wall_s": 27.0,
+  "deterministic": true,
+  "submission_md5": "b159562917dcaf5b42f906f269a05b82"
+ },
+ "public_lb": {
+  "score": 0.8622,
+  "date": "2026-09-19",
+  "submission_md5": "b159562917dcaf5b42f906f269a05b82",
+  "history": {
+   "v5.2 (правило legacy)": 0.8596,
+   "v5.3 (+ медиана классов)": 0.8615,
+   "v5.4 (+ SWIR-инициализация, отвергнуто)": 0.857,
+   "v5.5 (+ минимальная площадь 1 га)": 0.8622
+  }
+ }
+}
