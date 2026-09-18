@@ -24,3 +24,6 @@ submissions/*.csv
 .DS_Store
 .idea/
 .vscode/
+
+# Чекпойнты сетей BS публикуются в GitHub Releases (scripts/download_weights.sh)
+weights/*.pt

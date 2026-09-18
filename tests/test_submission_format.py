@@ -143,8 +143,6 @@ def test_bs_config(bs_cfg):
     assert 0.0 < bs_cfg["threshold"] < 1.0
     groups = [m["group"] for m in bs_cfg["cnn"]]
     assert len(set(groups)) == len(groups)
-    for m in bs_cfg["cnn"]:
-        assert (WEIGHTS / m["file"]).exists(), f"нет чекпойнта {m['file']}"
     for f in bs_cfg["gbdt"]["s1"] + bs_cfg["gbdt"].get("s2", []):
         assert (WEIGHTS / f).exists(), f"нет модели GBDT {f}"
     assert len(bs_cfg["blend_sources"]) == len(bs_cfg["blend_weights"])
@@ -153,6 +151,14 @@ def test_bs_config(bs_cfg):
     assert all(w >= 0 for w in bs_cfg["blend_weights"]) and sum(bs_cfg["blend_weights"]) > 0
     # вторая ступень GBDT — отвергнутый эксперимент, в финале выключена
     assert bs_cfg["final"] in {"blend", "cnn", "s2"}
+
+
+def test_bs_checkpoints(bs_cfg):
+    """Чекпойнты сетей публикуются в Releases: bash scripts/download_weights.sh."""
+    missing = [m["file"] for m in bs_cfg["cnn"] if not (WEIGHTS / m["file"]).exists()]
+    if len(missing) == len(bs_cfg["cnn"]):
+        pytest.skip("чекпойнты сетей не скачаны (bash scripts/download_weights.sh)")
+    assert not missing, f"нет чекпойнтов {missing}"
 
 
 def test_bs_config_matches_training_recipe(bs_cfg):
